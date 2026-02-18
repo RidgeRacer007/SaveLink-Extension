@@ -1,0 +1,439 @@
+:root {
+  color-scheme: dark;
+  --font-size: 18px;
+  --line-height: 26px;
+}
+body {
+  margin: 0;
+  padding: 10px;
+  min-width: 250px;
+  min-height: 300px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+
+  background-color: #020617;
+  background-image: url("floating-cogs.svg");
+  background-repeat: repeat;
+  background-size: 120px 120px;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  background:
+    radial-gradient(
+      160px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(111, 252, 255, 0.28),
+      rgba(111, 252, 255, 0.08) 35%,
+      rgba(111, 252, 255, 0.02) 55%,
+      transparent 70%
+    );
+
+  transition: background 0.08s linear;
+}
+
+button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.35) 0%, transparent 60%);
+  opacity: 0;
+  transform: scale(0.2);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+button.ripple::after {
+  opacity: 10;
+  transform: scale(3);
+}
+
+body[data-mode="save"] {
+  --accent: #4cff9a;
+}
+
+body[data-mode="active"] {
+  --accent: #63e6ff;
+}
+
+body[data-mode="delete"] {
+  --accent: #ff4d4d;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #0313fc;
+  border-radius: 10px;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  background: #06113d;
+  color: #cfffff;
+  caret-color: #6ffcff;
+  font-family: "Bitcount Single", system-ui;
+}
+
+input::placeholder {
+  color: rgba(180, 240, 255, 0.55);
+  text-shadow:
+    0 0 4px rgba(120, 220, 255, 0.4),
+    0 0 8px rgba(80, 200, 255, 0.25);
+  animation: placeholderGlow 2.5s ease-in-out infinite alternate;
+}
+
+input.typing::placeholder {
+  animation: none;
+  text-shadow: none;
+  opacity: 0.4;
+}
+
+
+button {
+  margin-left: 2px;
+  padding: 5px 11px;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  font-family: "Michroma", system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 5px 0 rgba(0,0,0,0.35),
+    0 7px 14px rgba(0,0,0,0.4);
+  transition:
+    transform 0.08s ease,
+    box-shadow 0.08s ease,
+    filter 0.15s ease;
+}
+
+button .neon {
+  background: transparent;
+  box-shadow: none;
+  filter: none;
+  transition: none;
+  color: #ffffff;
+  text-shadow:
+    0 0 2px rgba(255,255,255,0.4);
+}
+
+button:hover {
+  filter: brightness(1.2);
+}
+
+button:active {
+  transform: translateY(3px) scale(0.97);
+  box-shadow:
+    0 2px 0 rgba(0,0,0,0.4),
+    0 4px 8px rgba(0,0,0,0.3);
+    animation: haptic 0.18s cubic-bezier(.25,.8,.4,1);
+}
+
+
+
+
+#input-btn {
+  border-radius: 7px 21px;
+  color: #4ef5c3;
+  background: linear-gradient(135deg, #2ecc71, #1fa35c);
+}
+
+#tab-btn {
+  border-radius: 7px 21px;
+  color: #4ef5c3;
+  background: linear-gradient(135deg, #32c5ff, #1b7cff);
+}
+
+#del-btn {
+  border-radius: 21px 7px;
+  color: #4ef5c3;
+  background: linear-gradient(135deg, #ff3b3b, #b80000);
+}
+
+/* SAVE (pink-green style) */
+#input-btn:hover .neon-save {
+  color: #adf7e1;
+  animation: neonSave 1.5s ease-in-out infinite alternate;
+}
+
+/* ACTIVE (blue style) */
+#tab-btn:hover .neon-active {
+  color: #9fe2fc;
+  animation: neonActive 1.5s ease-in-out infinite alternate;
+}
+
+/* DELETE (red style) */
+#del-btn:hover .neon-delete {
+	color: #fcf879;
+  animation: neonDelete 1.5s ease-in-out infinite alternate;
+}
+
+
+.Iam {
+  padding: 6px 10px;
+  font-family: "Bitcount Single", system-ui;
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  display: flex;
+  background: transparent;
+  box-shadow: none;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.4s ease, text-shadow 0.4s ease;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 14px var(--accent, #63e6ff);
+}
+
+.Iam p {
+  margin: 0;
+  white-space: nowrap;
+  color: #cfd8ff;
+  background: transparent;
+    transition: color 0.4s ease, text-shadow 0.4s ease;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 14px var(--accent, #63e6ff);
+}
+
+.Iam b {
+  height: var(--line-height);
+  overflow: hidden;
+  position: relative;
+  font-weight: normal;
+}
+
+.Iam .innerIam {
+  margin-bottom: 2px;
+  position: relative;
+  animation: move 5s infinite ease-in-out;
+}
+
+.Iam .innerIam span {
+  display: inline-block;
+  background: transparent;
+  will-change: text-shadow;
+  animation: neonFlicker 2.2s ease-in-out infinite;
+}
+
+.save {
+  color: #4cff9a;
+  text-shadow: 0 0 4px #fff, 0 0 16px #4cff9a, 0 0 32px #4cff9a;
+}
+
+.active {
+  color: #63e6ff;
+  text-shadow: 0 0 4px #fff, 0 0 16px #63e6ff, 0 0 32px #63e6ff;
+}
+
+.delete {
+  color: #ff4d4d;
+  text-shadow: 0 0 4px #fff, 0 0 16px #ff4d4d, 0 0 32px #ff4d4d;
+}
+
+.project {
+  color: #ffe066;
+  text-shadow: 0 0 4px #fff, 0 0 16px #ffe066, 0 0 32px #ffe066;
+}
+
+.soon {
+  color: #bfaaff;
+  font-style: italic;
+  text-shadow: 0 0 4px #fff, 0 0 16px #bfaaff, 0 0 32px #bfaaff;
+}
+
+#ul-el a {
+  position: relative;
+  text-decoration: none;
+  font-family: "Bitcount Single", system-ui;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+
+  background: linear-gradient(
+    150deg,
+    #3d64f2,
+    #2651ed,
+    #0f1adb
+  );
+  background-size: 200% 100%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  text-shadow:
+    0 0 2px rgba(255,255,255,0.6),
+    0 0 8px rgba(111,252,255,0.6),
+    0 0 16px rgba(159,168,255,0.5);
+
+  animation:
+    linkGradient 4s linear infinite,
+    linkGlow 2.4s ease-in-out infinite;
+
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+#ul-el a:hover {
+  filter: brightness(1.25);
+  transform: translateY(-1px);
+} 
+
+.privacy-footer {
+  position: fixed;
+  bottom: 6px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.privacy-footer p {
+  margin: 0;
+  font-size: 10px;
+  font-family: "Bitcount Single", system-ui;
+  color: #9fbfff;
+  text-shadow:
+    0 0 2px rgba(255,255,255,0.3),
+    0 0 6px rgba(120,180,255,0.4);
+}
+
+@keyframes move {
+  0% { top: 0; }
+  20% { top: calc(-1 * var(--line-height)); }
+  40% { top: calc(-2 * var(--line-height)); }
+  60% { top: calc(-3 * var(--line-height)); }
+  80% { top: calc(-4 * var(--line-height)); }
+  100% { top: 0; }
+}
+
+@keyframes neonFlicker {
+  0% {
+    opacity: 0.85;
+    text-shadow:
+      0 0 2px #fff,
+      0 0 8px currentColor,
+      0 0 18px currentColor;
+  }
+  50% {
+    opacity: 1;
+    text-shadow:
+      0 0 4px #fff,
+      0 0 12px currentColor,
+      0 0 26px currentColor;
+  }
+  100% {
+    opacity: 0.9;
+    text-shadow:
+      0 0 3px #fff,
+      0 0 10px currentColor,
+      0 0 22px currentColor;
+  }
+}
+
+@keyframes neonSave {
+  from {
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #4cff9a,
+      0 0 20px #4cff9a,
+      0 0 40px #4cff9a;
+  }
+  to {
+    text-shadow:
+      0 0 2px #fff,
+      0 0 6px #4cff9a,
+      0 0 12px #4cff9a,
+      0 0 24px #4cff9a;
+  }
+}
+
+@keyframes neonActive {
+  from {
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #63e6ff,
+      0 0 20px #63e6ff,
+      0 0 40px #63e6ff;
+  }
+  to {
+    text-shadow:
+      0 0 2px #fff,
+      0 0 6px #63e6ff,
+      0 0 12px #63e6ff,
+      0 0 24px #63e6ff;
+  }
+}
+
+@keyframes haptic {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(0.96); }
+  100% { transform: scale(1); }
+}
+
+@keyframes neonDelete {
+  from {
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #ff4d4d,
+      0 0 20px #ff4d4d,
+      0 0 40px #ff4d4d;
+  }
+  to {
+    text-shadow:
+      0 0 2px #fff,
+      0 0 6px #ff4d4d,
+      0 0 12px #ff4d4d,
+      0 0 24px #ff4d4d;
+  }
+}
+
+
+@keyframes placeholderGlow {
+  from {
+    opacity: 0.55;
+    text-shadow:
+      0 0 4px rgba(120, 220, 255, 0.35),
+      0 0 8px rgba(80, 200, 255, 0.2);
+  }
+  to {
+    opacity: 0.75;
+    text-shadow:
+      0 0 6px rgba(160, 255, 255, 0.6),
+      0 0 14px rgba(100, 220, 255, 0.45);
+  }
+}
+
+@keyframes linkGradient {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes linkGlow {
+  0% {
+    text-shadow:
+      0 0 2px rgba(255,255,255,0.5),
+      0 0 6px rgba(111,252,255,0.5),
+      0 0 14px rgba(159,168,255,0.4);
+  }
+  100% {
+    text-shadow:
+      0 0 3px rgba(255,255,255,0.8),
+      0 0 10px rgba(111,252,255,0.8),
+      0 0 22px rgba(159,168,255,0.7);
+  }
+}

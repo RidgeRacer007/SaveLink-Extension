@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" name="darkreader-lock">
+    <link rel="stylesheet" href="style.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Bitcount+Single:wght@100..900&family=Dancing+Script:wght@400..700&display=swap"
+      rel="stylesheet"
+    >
+    <link
+      href="https://fonts.googleapis.com/css2?family=Michroma&display=swap"
+      rel="stylesheet"
+    >
+  </head>
+
+  <body>
+    <div class="Iam">
+      <p>Save-Link:</p>
+      <b>
+        <div class="innerIam">
+          <span class="save">Save it!</span><br/>
+          <span class="active">Active it!</span><br/>
+          <span class="delete">Delete it!</span><br/>
+          <span class="project">It's my 1st Project!!</span><br/>
+          <span class="soon">more coming soon ;)</span>
+        </div>
+      </b>
+    </div>
+
+    <div class="privacy-footer">
+	  <p>
+	    This extension does not collect, transmit, or share any personal data.<br>
+	    All saved links are stored locally in your browser.
+	  </p>
+	</div>
+
+    <input
+      type="text"
+      id="input-el"
+      placeholder="Enter your link here"
+      aria-label="Enter link to save"
+    >
+
+    <button type="button" id="input-btn"><span class="neon neon-save">SAVE THE LINK! 💾</span></button>
+	<button type="button" id="tab-btn"><span class="neon neon-active">SAVE ACTIVE LINK! ⤓</span></button>
+	<button type="button" id="del-btn"><span class="neon neon-delete">DELETE ALL LINKS! ⚠️</span></button>
+
+    <ul id="ul-el"></ul>
+
+    <script src="main.js"></script>
+  </body>
+</html>

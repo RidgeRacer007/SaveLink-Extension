@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "Save Links",
+  "version": "1.0",
+  "description": "Save and manage links with a neon cyber UI.",
+  "icons": {
+    "48": "icon.png"
+  },
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_icon": "icon.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ]
+}
